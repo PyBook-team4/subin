@@ -1,8 +1,22 @@
 # services/member_service.py
 from datetime import datetime
-from models.member import Member
-from utils.file_handler import load_json, save_json
 
+import json
+
+# 파일이 완성되면 불러오고, 비어있으면 임시 함수 사용.
+try:
+    from models.member import Member
+    from utils.file_handler import load_json, save_json
+
+# [임시 테스트용 함수]
+except ImportError:
+    def load_json(filepath: str):
+        with open(filepath, 'r', encoding='utf-8') as f:
+            return json.load(f)
+
+    def save_json(filepath: str, data):
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
 
 
 #회원가입
@@ -157,3 +171,11 @@ def show_member_info(email: str) -> dict | None:
     # 일단 예외의 경우를 위해 적어놨지만, 필요한지 의문
     print("❌ 회원 정보를 찾을 수 없습니다.")
     return None
+
+# --- 테스트용 코드 (확인 후 지우거나 주석 처리) ---
+if __name__ == "__main__":
+    # 1. 마이페이지 내 정보 확인 테스트
+    show_member_info("test@naver.com")
+    
+    # 2. 회원 탈퇴 테스트
+    withdraw("test@naver.com")

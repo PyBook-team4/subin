@@ -1,0 +1,11 @@
+[
+  {
+    "loan_id": 101,
+    "member_id": "test@naver.com",
+    "book_id": 1,
+    "loan_date": "2026-10-15",
+    "due_date": "2026-10-29",
+    "return_date": null,
+    "status": "반납완료"
+  }
+]
